@@ -1,0 +1,55 @@
+%! TEX root = ../note-clt-sample-quantile.tex
+
+\section{Introduction}
+
+This note provides an exposition of the central limit theorem for sample
+quantiles in the spirit of \citet[Example 24,
+p. 53]{1984pollardConvergenceStochasticProcesses}.
+A more general result can be found in \citet[Section
+2.3.3, pp. 77-84]{1980serflingApproximationTheoremsMathematical}.
+The purpose of this note is to provide a practical example of the
+Lindeberg-Feller central limit theorem (CLT).
+
+\begin{definition}
+A function \(F : \mathbb{R} \to \mathbb{R}\) is a cumulative distribution
+function (cdf) if and only if
+\begin{enumerate}
+  \item \(F\) is weakly increasing, i.e. if \(x \leq y\) then \(F (x) \leq F
+    (y)\),
+  \item \(F\) is right continuous, i.e. \(\lim_{x \downarrow y} F (x) = F (y)\)
+    for every \(y \in \mathbb{R}\),
+  \item \(\lim_{y \to - \infty} F (y) = 0\) and \(\lim_{y \to \infty} F (y) =
+    1\).
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+For real valued random variables \(Y_{1}, \dots, Y_{n}\), the empirical
+cumulative distribution function (ecdf) is defined by
+\begin{equation*}
+  \widehat{F}_{n} (y) := \widehat{F}_{n} \left( y; Y_{1}, \dots, Y_{n} \right)
+  := \frac{1}{n} \sum_{i = 1}^{n} \mathbf{1} \left\{ Y_{i} \leq y \right\}.
+\end{equation*}
+\end{definition}
+
+\begin{definition}
+For a cdf \(G\) on \(\mathbb{R}\) and \(p \in (0, 1)\), the associated quantile
+is
+\begin{equation*}
+  Q (p; G) := \inf \{y \in \mathbb{R} : G (y) \geq p\}.
+\end{equation*}
+\end{definition}
+
+\begin{assumption}
+\label{asm--iid}
+Let \(F\) be a cumulative distribution function (cdf) on \(\mathbb{R}\).
+\(\left\{ Y_{i} \right\}_{i = 1}^{\infty}\) is a sequence of iid random
+variables all with cdf \(F\).
+\end{assumption}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../note-clt-sample-quantile"
+%%% End:
+
+% LocalWords:  cdf ecdf
