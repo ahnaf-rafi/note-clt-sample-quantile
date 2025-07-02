@@ -36,7 +36,6 @@ p. 51]{1984pollardConvergenceStochasticProcesses}.
 \texorpdfstring{\eqref{eqn--bin-clt-normal}}{(\ref{eqn--bin-clt-normal})}
 in \texorpdfstring{\Cref{thm--bin-clt-normal}}{Theorem
 \ref{thm--bin-clt-normal}}}
-\label{sec--prf--eqn--bin-clt-normal}
 
 The result in \eqref{eqn--bin-clt-normal} arises as a consequence of the
 Liapunov CLT (\Cref{thm--liapunov-clt}).
@@ -88,7 +87,6 @@ and therefore \eqref{eqn--bin-clt-normal} is also proven.
 \texorpdfstring{\eqref{eqn--bin-clt-normal-Sn}}{(\ref{eqn--bin-clt-normal-Sn})}
 in \texorpdfstring{\Cref{thm--bin-clt-normal}}{Theorem
 \ref{thm--bin-clt-normal}}}
-\label{sec--prf--eqn--bin-clt-normal-Sn}
 
 To prove \eqref{eqn--bin-clt-normal-Sn}, we will need the following ingredients.
 
@@ -165,17 +163,15 @@ If \(x \in \mathbb{R}\), then the second term above converges to zero by
 continuity of \(F\).
 Hence, it remains to show \Cref{thm--polya}.
 
-Let \(k \in \mathbb{N} \setminus \{1, 2\}\).
+Let \(k \in \mathbb{N} \setminus \{1\}\).
 Throughout, let \(x_{k, 0} = - \infty\) and \(x_{k, k} = + \infty\).
 By continuity of \(F\) and \Cref{lem--FQp-equal-p-continuity}, we can find
 \(x_{k, 1}, \dots, x_{k, k - 1}\) such that \(x_{k, j - 1} < x_{k, j}\) and
 \(F \left( x_{k, j} \right) = j / k\) for each \(j \in \{1, \dots, k - 1\}\).
 Clearly the same is true \(j \in \{0, k\}\) as well.
 Take any \(j \in \left\{ 1, \dots, k \right\}\) and note that
-\begin{equation*}
-  F \left( x_{k, j} \right) = \frac{j}{k} = \frac{j - 1}{k} + \frac{1}{k} = F
-  \left( x_{k, j - 1} \right) + \frac{1}{k}.
-\end{equation*}
+\(F \left( x_{k, j} \right) = \frac{j}{k} = F \left( x_{k, j - 1} \right) +
+\frac{1}{k}\).
 Thus for \(x \in \left[ x_{k, j - 1}, x_{k, j} \right]\),
 \begin{align*}
   F_{n} (x) - F (x) \leq
@@ -183,7 +179,8 @@ Thus for \(x \in \left[ x_{k, j - 1}, x_{k, j} \right]\),
   \left( x_{k, j} \right) - F \left( x_{k, j} \right) + \frac{1}{k} \\
   \leq
   & \, \max_{l \in \{0, 1, \dots, k\}} \left| F_{n} \left( x_{k, l} \right) - F
-  \left( x_{k, l} \right) \right| + \frac{1}{k} \\
+  \left( x_{k, l} \right) \right| + \frac{1}{k}, \\
+  \text{and} \quad
   F_{n} (x) - F (x) \geq
   & \, F_{n} \left( x_{k, j - 1} \right) - F \left( x_{k, j} \right) = F_{n}
   \left( x_{k, j - 1} \right) - F \left( x_{k, j - 1} \right) - \frac{1}{k} \\
@@ -199,22 +196,25 @@ Therefore,
   \label{eqn--polya-ineq-1}
 \end{equation}
 Let \(\varepsilon > 0\) be given.
-Choose \(K_{\varepsilon} \in \mathbb{N}\) such that \(K_{\varepsilon} \geq 2 /
-\varepsilon\).
-By \(F_{n} \rightsquigarrow F\) and continuity of \(F\), there must exist a
-\(N_{\varepsilon} \in \mathbb{N}\) such that for all \(n \geq N_{\varepsilon}\)
+Choose \(K_{\varepsilon} \in \mathbb{N}\) such that \(K_{\varepsilon} \geq
+\max\{2, 2 / \varepsilon\}\).
+Then \(\left\{ x_{K_{\varepsilon}, l} \right\}_{l =
+1}^{K_{\varepsilon} - 1}\) are all continuity points of \(F\) since \(F\) is
+continuous.
+By \(F_{n} \rightsquigarrow F\), \(\lim_{n \to \infty} F_{n} \left(
+x_{K_{\varepsilon}, l} \right) = F \left( x_{K_{\varepsilon}, l} \right)\) for
+each \(l \in \left\{ 1, \dots, K_{\varepsilon} - 1 \right\}\).
+Therefore, there must exist a \(N_{\varepsilon} \in \mathbb{N}\) such that for
+all \(n \geq N_{\varepsilon}\)
 and all \(l \in \left\{ 1, \dots, K_{\varepsilon} - 1 \right\}\),
-\begin{equation*}
-  \left| F_{n} \left( x_{K_{\varepsilon}, l} \right) - F \left(
-  x_{K_{\varepsilon}, l} \right) \right| \leq \frac{\varepsilon}{2}.
-\end{equation*}
+\(\left| F_{n} \left( x_{K_{\varepsilon}, l} \right) - F
+\left(x_{K_{\varepsilon}, l} \right) \right| \leq \varepsilon / 2\).
+Furthermore the absolute difference is zero for \(l \in \left\{ 0,
+K_{\varepsilon} \right\}\).
 Combine this with \(1 / K_{\varepsilon} \leq \varepsilon / 2\) and
 \eqref{eqn--polya-ineq-1} to see that
-\begin{equation*}
-  \sup_{x \in \mathbb{R}} \left| F_{n} (x) - F (x) \right| \leq \varepsilon
-  \quad \text{for all } n \geq N_{\varepsilon}.
-\end{equation*}
-This proves \Cref{thm--polya}.
+\(\sup_{x \in \mathbb{R}} \left| F_{n} (x) - F (x) \right| \leq \varepsilon\)
+for all \(n \geq N_{\varepsilon}\).
 \qed
 
 %%% Local Variables:
