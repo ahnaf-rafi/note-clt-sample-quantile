@@ -1,0 +1,208 @@
+%! TEX root = ../note-clt-sample-quantile.tex
+
+\section{Proof of
+\texorpdfstring{\Cref{thm--clt-quantile}}{Theorem
+\ref{thm--clt-quantile}}}
+\label{sec--prf--thm--clt-quantile}
+
+Differentiability of \(F\) at \(\theta_{p}\) with derivative \(f \left(
+\theta_{p} \right)\) implies both left- and right-differentiability with left-
+and right-derivatives both equal to \(f \left( \theta_{p} \right)\) (see
+\Cref{rem--diff-equiv-bi-dir-diff}).
+Hence \eqref{eqn--clt-quantile} is
+implied by the combination of \eqref{eqn--clt-quantile-0} and
+\eqref{eqn--clt-quantile-non0}.
+So it suffices to prove \eqref{eqn--clt-quantile-0} and
+\eqref{eqn--clt-quantile-non0}.
+To start, recall from \eqref{eqn--sample-quantile-law-def} that
+\begin{equation*}
+  H_{p, n} (t) = \Pr \left\{ \widehat{\theta}_{p, n} \leq \theta_{p} +
+  \frac{t}{\sqrt{n}} \right\}.
+\end{equation*}
+We start with a lemma which allow us to relate this to the ecdf
+\(\widehat{F}_{n}\).
+
+\Cref{lem--p-leq-Fy-iff-Qp-leq-y} shows in \eqref{eqn--p-leq-Fy-iff-Qp-leq-y}
+that \(\widehat{\theta}_{p} \leq y\) if and only if \(\widehat{F}_{n} (y) \geq
+p\).
+Combine this with \eqref{eqn--sample-quantile-law-def} by setting \(y =
+\theta_{p} + (t / \sqrt{n})\) to see that
+\begin{equation*}
+  H_{p, n} (t) = \Pr \left\{ \widehat{F}_{n} \left( \theta_{p} +
+  \frac{t}{\sqrt{n}} \right) \geq p \right\}.
+\end{equation*}
+For brevity, rewrite this as
+\begin{equation}
+  H_{p, n} (t) = \Pr \left\{ \widehat{F}_{n} \left( y_{p, n} (t) \right) \geq p
+  \right\},
+  \quad \text{where} \quad
+  y_{p, n} (t) = \theta_{p} + \frac{t}{\sqrt{n}}.
+  \label{eqn--sample-quantile-sampling-dist-1}
+\end{equation}
+We know that \(n \widehat{F}_{n} \left( y_{p, n} (t) \right) \sim
+\mathrm{Binomial} \left( n, F \left( y_{p, n} (t) \right) \right)\).
+To help characterize limits of \(H_{p, n}\) via
+\eqref{eqn--sample-quantile-sampling-dist-1},
+\Cref{thm--bin-clt-normal} provides a central limit theorem for Binomial
+distributions whose trial success probabilities can potentially change with the
+number of trials.
+
+\begin{theorem}
+\label{thm--bin-clt-normal}
+Let \(Z \sim \N (0, 1)\), \(\Phi (z) := \Pr \{Z \leq z\}\), \(\left\{ p_{n}
+\right\}\) be a sequence in \([0, 1]\)
+and \(S_{n} \sim \mathrm{Binomial} \left( n, p_{n} \right)\).
+\begin{equation}
+  \text{If} \quad
+  \lim_{n \to \infty} \frac{1}{\sqrt{n p_{n} \left( 1 - p_{n} \right)}} = 0,
+  \quad \text{then} \quad \frac{S_{n} - n p_{n}}{\sqrt{n p_{n} \left( 1 - p_{n}
+  \right)}} =: Z_{n} \rightsquigarrow Z.
+  \label{eqn--bin-clt-normal}
+\end{equation}
+Hence, if for some \(p_{\ast} \in (0, 1)\) and \(\Delta \in \mathbb{R}\),
+\(p_{n} = p_{\ast} + n^{- 1 / 2} \Delta + o \left( n^{- 1 / 2} \right)\),
+then
+\begin{equation}
+  \lim_{n \to \infty} \Pr \left\{ \frac{S_{n}}{n} \geq p_{\ast} \right\} = \Phi
+  \left( \frac{\Delta}{\sqrt{p_{\ast} \left( 1 - p_{\ast} \right)}} \right).
+  \label{eqn--bin-clt-normal-Sn}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+See \Cref{sec--prf--thm--bin-clt-normal}.
+\end{proof}
+
+\subsection{Proof of
+\texorpdfstring{\eqref{eqn--clt-quantile-0}}{(\ref{eqn--clt-quantile-0})}
+in \texorpdfstring{\Cref{thm--clt-quantile}}{Theorem \ref{thm--clt-quantile}}}
+
+In this case, \(t = 0\) and so \(y_{p, n} (t) = \theta_{p}\) is constant in
+\(n\).
+Set
+\begin{equation}
+  S_{n} = n \widehat{F}_{n} \left( \theta_{p} \right) \quad \text{and} \quad
+  p_{n} = F \left( \theta_{p} \right).
+  \label{eqn--Sn-pn-application-def-0}
+\end{equation}
+The hypotheses for \eqref{eqn--bin-clt-normal} and
+\eqref{eqn--bin-clt-normal-Sn} are satisfied with \(p_{n} = p_{\ast} = F \left(
+\theta_{p} \right)\) and \(\Delta = 0\).
+Furthermore, since \(p = F \left( \theta_{p} \right)\) by hypothesis to
+\eqref{eqn--clt-quantile-0}, from \eqref{eqn--sample-quantile-sampling-dist-1},
+\eqref{eqn--bin-clt-normal-Sn}, and \eqref{eqn--Sn-pn-application-def-0} we get
+\(\lim_{n \to \infty} H_{p, n} (0) = \Phi (0) = \frac{1}{2}\) which proves
+\eqref{eqn--clt-quantile-0}.
+\qed
+
+\subsection{On necessity of the condition \texorpdfstring{\(p = F \left(
+\theta_{p} \right)\)}{p = F (theta p)}}
+
+Continue to consider the case \(t = 0\), but suppose that \(p \neq F \left(
+\theta_{p} \right)\).
+By \Cref{lem--FQ-geq-p}, \(p \leq F \left( \theta_{p} \right)\).
+So if \(p \neq F \left( \theta_{p} \right)\), then it must be the case that
+\(p < F \left( \theta_{p} \right)\).
+We can still apply \eqref{eqn--bin-clt-normal} in \Cref{thm--bin-clt-normal}
+still applies with \(S_{n} = n \widehat{F}_{n} \left( \theta_{p} \right)\)
+and \(p_{n} = F \left( \theta_{p} \right)\).
+Then combine \eqref{eqn--sample-quantile-sampling-dist-1} and
+\eqref{eqn--bin-clt-normal} as follows:
+\begin{align*}
+  H_{p, n} (0) =
+  & \, \Pr \left\{ \widehat{F}_{n} \left( \theta_{p} \right) \geq p
+  \right\} = \Pr \left\{ \frac{n \left( \widehat{F}_{n} \left( \theta_{p}
+  \right) - F \left( \theta_{p} \right) \right)}{\sqrt{n F \left( \theta_{p}
+  \right) \left( 1 - F \left( \theta_{p} \right) \right)}} \geq \frac{n \left( p
+  - F \left( \theta_{p} \right) \right)}{\sqrt{n F \left( \theta_{p} \right)
+  \left( 1 - F \left( \theta_{p} \right) \right)}} \right\} \\
+  =
+  & \, \Pr \left\{ Z_{n} \geq \frac{\sqrt{n} \left( p - F \left( \theta_{p}
+  \right) \right)}{\sqrt{F \left( \theta_{p} \right) \left( 1 - F \left(
+  \theta_{p} \right) \right)}} \right\}.
+\end{align*}
+But by \(p < F \left( \theta_{p} \right)\),
+\begin{equation*}
+  \lim_{n \to \infty} \frac{\sqrt{n} \left( p - F \left( \theta_{p}
+  \right) \right)}{\sqrt{F \left( \theta_{p} \right) \left( 1 - F \left(
+  \theta_{p} \right) \right)}} = - \infty,
+\end{equation*}
+and so
+\begin{align*}
+  \lim_{n \to \infty} H_{p, n} (0) =
+  & \, \lim_{n \to \infty} \Pr \left\{ Z_{n} \geq \frac{\sqrt{n} \left( p - F
+  \left( \theta_{p} \right) \right)}{\sqrt{F \left( \theta_{p} \right) \left( 1
+  - F \left( \theta_{p} \right) \right)}} \right\} = 1.
+\end{align*}
+Of course since \(1 \geq H_{p, n} (t) \geq H_{p, n} (0)\) if \(t > 0\),
+\(\lim_{n \to \infty} H_{p, n} (t) = 1\) for \(t > 0\) as well.
+That is, if \(p \neq F \left( \theta_{p} \right)\), we cannot get a
+non-degenerate Gaussian limit for \(\sqrt{n} \left( \widehat{\theta}_{p, n} -
+\theta_{p} \right)\).
+
+Since we focus only on the cases where \(H_{p, n}\) limits to a non-degenerate
+Gaussian, it is therefore necessary to impose the restriction \(p = F \left(
+\theta_{p} \right)\).
+To ensure this holds for all \(p \in (0, 1)\) we can maintain an assumption of
+continuity of \(F\) at \(\theta_{p}\) as in \Cref{lem--FQp-equal-p-continuity}.
+
+\subsection{Proof of
+\texorpdfstring{\eqref{eqn--clt-quantile-non0}}{(\ref{eqn--clt-quantile-non0})}
+in \texorpdfstring{\Cref{thm--clt-quantile}}{Theorem \ref{thm--clt-quantile}}}
+
+Here we set
+\begin{equation}
+  S_{n} = n \widehat{F}_{n} \left( y_{p, n} (t) \right), \quad
+  p_{n} = F \left( y_{p, n} (t) \right), \quad p_{\ast} = p = F \left(
+  \theta_{p} \right), \quad \text{and} \quad \Delta = f \left( \theta_{p}
+  \right) t.
+  \label{eqn--Sn-pn-application-def-non0}
+\end{equation}
+Then \eqref{eqn--sample-quantile-sampling-dist-1} becomes
+\begin{equation*}
+  H_{p, n} (t) = \Pr \left\{ \frac{S_{n}}{n} \geq p_{\ast} \right\}.
+\end{equation*}
+Hence we wish to apply \eqref{eqn--bin-clt-normal-Sn} and so we have to show
+\(p_{n}\), \(p_{\ast}\) and \(\Delta\) as defined in
+\eqref{eqn--Sn-pn-application-def-non0} satisfy
+\begin{equation}
+  \lim_{n \to \infty} \sqrt{n} \left( p_{n} - p_{\ast} - \frac{\Delta}{\sqrt{n}}
+  \right) = 0.
+  \label{eqn--bin-clt-normal-Sn-hyp-1}
+\end{equation}
+To that end, let \(\delta_{n} = t / \sqrt{n}\) and note that since \(t \neq 0\),
+\begin{align*}
+  \sqrt{n} \left( p_{n} - p_{\ast} - \frac{\Delta}{\sqrt{n}}
+  \right) =
+  & \, \sqrt{n} \left( F \left( \theta_{p} + \delta_{n} \right) - F \left(
+  \theta_{p} \right) - f \left( \theta_{p} \right) \delta_{n} \right) \\
+  =
+  & \, t \cdot \frac{F \left( \theta_{p} + \delta_{n} \right) - F \left(
+  \theta_{p} \right) - f \left( \theta_{p} \right) \delta_{n}}{\delta_{n}}.
+\end{align*}
+Therefore, under either hypothesis of directional differentiability (since the
+sign of \(\delta_{n}\) and \(t\) are equal),
+\begin{equation*}
+  \lim_{n \to \infty} \sqrt{n} \left( p_{n} - p_{\ast} - \frac{\Delta}{\sqrt{n}}
+  \right) = t \lim_{n \to \infty} \cdot \frac{F \left( \theta_{p} + \delta_{n}
+\right) - F \left(
+  \theta_{p} \right) - f \left( \theta_{p} \right) \delta_{n}}{\delta_{n}} = 0,
+\end{equation*}
+which shows \eqref{eqn--bin-clt-normal-Sn-hyp-1}.
+Apply \eqref{eqn--bin-clt-normal-Sn} with
+\eqref{eqn--Sn-pn-application-def-non0} to get
+\begin{equation*}
+  \lim_{n \to \infty} H_{p, n} (t) = \lim_{n \to \infty} \Pr \left\{
+  \frac{S_{n}}{n} \geq p_{\ast} \right\} = \Phi \left(
+  \frac{\Delta}{\sqrt{p_{\ast} \left( 1 - p_{\ast} \right)}} \right) = \Phi
+  \left( \frac{f \left( \theta_{p} \right) t}{\sqrt{p (1 - p)}} \right),
+\end{equation*}
+which is exactly \eqref{eqn--clt-quantile-non0}.
+\qed
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../note-clt-sample-quantile"
+%%% End:
+
+% LocalWords:  cdf ecdf

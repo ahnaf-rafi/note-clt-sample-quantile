@@ -1,0 +1,223 @@
+%! TEX root = ../note-clt-sample-quantile.tex
+
+\section{Proof of the key central limit theorem,
+\texorpdfstring{\Cref{thm--bin-clt-normal}}{Theorem
+\ref{thm--bin-clt-normal}}}
+\label{sec--prf--thm--bin-clt-normal}
+
+We will need to use Liapunov's central limit theorem (\Cref{thm--liapunov-clt}
+below) in the proof of \eqref{eqn--bin-clt-normal} in
+\Cref{thm--bin-clt-normal}.
+
+\begin{theorem}[Liapunov's Central Limit Theorem]
+\label{thm--liapunov-clt}
+For \(n \in \mathbb{N}\), let \(\xi_{n, 1}, \dots, \xi_{n, n}\)
+be independent random variables such that \(\E \left[ \xi_{n i} \right] = 0\)
+and for some \(\delta > 0\), \(\E \left[ \xi_{n i}^{2 + \delta} \right] <
+\infty\) for each \(i \in \{1, \dots, n\}\).
+\begin{equation}
+  \text{If} \quad \lim_{n \to \infty} \frac{\sum_{i = 1}^{n} \E \left[ \left|
+  \xi_{n i} \right|^{2 + \delta} \right]}{\left( \sum_{i = 1}^{n} \Var \left[
+  \xi_{n i} \right] \right)^{1 + (\delta / 2)}} = 0, \quad \text{then} \quad
+  \frac{\sum_{i = 1}^{n} \xi_{n i}}{\sqrt{\sum_{i = 1}^{n} \Var \left[ \xi_{n i}
+  \right]}} \rightsquigarrow Z.
+  \label{eqn--liapunov-clt}
+\end{equation}
+\end{theorem}
+
+\begin{proof}[Proof of \Cref{thm--liapunov-clt}]
+This is a standard result proven in numerous texts.
+See for example \citet[Theorem 27.3, p. 362]{1995billingsleyProbabilityMeasure}
+or \citet[Theorem 18 in Section 4 of Chapter III,
+p. 51]{1984pollardConvergenceStochasticProcesses}.
+\end{proof}
+
+\subsection{Proof of
+\texorpdfstring{\eqref{eqn--bin-clt-normal}}{(\ref{eqn--bin-clt-normal})}
+in \texorpdfstring{\Cref{thm--bin-clt-normal}}{Theorem
+\ref{thm--bin-clt-normal}}}
+\label{sec--prf--eqn--bin-clt-normal}
+
+The result in \eqref{eqn--bin-clt-normal} arises as a consequence of the
+Liapunov CLT (\Cref{thm--liapunov-clt}).
+To that end, independently across \(i = 1, \dots, n\),
+let \(\xi_{n i} + p_{n} \sim \mathrm{Bernoulli} \left( p_{n} \right)\) so that
+\begin{equation*}
+  \Pr \left\{ \xi_{n, i} = 1 - p_{n} \right\} = p_{n} \quad \text{and}
+  \quad \Pr \left\{ \xi_{n, i} = - p_{n} \right\} = 1 - p_{n}.
+  % \label{eqn--bernoulli-clt-normal-xini-centering-def}
+\end{equation*}
+Note that
+\begin{equation*}
+  \E \left[ \xi_{n, i} \right] = 0, \quad \E \left[ \xi_{n, i}^{2} \right] =
+  \Var \left[ \xi_{n, i} \right] = p_{n} \cdot \left( 1 - p_{n} \right) \quad
+  \text{and} \quad S_{n} - n p_{n} \sim \sum_{i = 1}^{n} \xi_{n i}.
+\end{equation*}
+Therefore, showing \eqref{eqn--bin-clt-normal} is equivalent to showing
+\begin{equation}
+  \text{If} \quad \lim_{n \to \infty} \frac{1}{\sqrt{n p_{n} \left( 1 - p_{n}
+  \right)}} = 0, \quad \text{then} \quad \frac{\sum_{i = 1}^{n} \xi_{n
+  i}}{\sqrt{n p_{n} (1 - p_{n})}} \rightsquigarrow Z.
+  \label{eqn--binomial-clt-normal-1}
+\end{equation}
+Since \(\sum_{i = 1}^{n} \Var \left[ \xi_{n i} \right] = n p_{n} \left( 1 -
+p_{n} \right)\), we can show \eqref{eqn--binomial-clt-normal-1} by proving the
+limit condition in the premise of \eqref{eqn--liapunov-clt}
+for the case \(\delta = 1\).
+To that end
+\begin{equation*}
+  \sum_{i = 1}^{n} \E \left[ \left| \xi_{n i} \right|^{3} \right] = n \E \left[
+  \left| \xi_{n 1} \right|^{3} \right] = n p_{n} \left( 1 - p_{n} \right) \left[
+  p_{n}^{2} + \left( 1 - p_{n} \right)^{2} \right].
+\end{equation*}
+Thus, since \(p \in [0, 1]\) implies \(0 \leq p^{2} + (1 - p)^{2} \leq 1\),
+\begin{equation*}
+   \frac{\sum_{i = 1}^{n} \E \left[ \left| \xi_{n i} \right|^{3} \right]}{\left(
+   \sum_{i = 1}^{n} \Var \left[ \xi_{n i} \right] \right)^{3 / 2}} = \frac{n
+   p_{n} \left( 1 - p_{n} \right) \left[ p_{n}^{2} + \left( 1 - p_{n}
+   \right)^{2} \right]}{\left( n p_{n} \left( 1 - p_{n} \right) \right)^{3 / 2}}
+   = \frac{p_{n}^{2} + \left( 1 - p_{n} \right)^{2}}{\sqrt{n p_{n} \left( 1 -
+   p_{n} \right)}} \leq \frac{1}{\sqrt{n p_{n} \left( 1 -
+   p_{n} \right)}}.
+\end{equation*}
+Hence \eqref{eqn--binomial-clt-normal-1} is proven by \eqref{eqn--liapunov-clt},
+and therefore \eqref{eqn--bin-clt-normal} is also proven.
+\qed
+
+\subsection{Proof of
+\texorpdfstring{\eqref{eqn--bin-clt-normal-Sn}}{(\ref{eqn--bin-clt-normal-Sn})}
+in \texorpdfstring{\Cref{thm--bin-clt-normal}}{Theorem
+\ref{thm--bin-clt-normal}}}
+\label{sec--prf--eqn--bin-clt-normal-Sn}
+
+To prove \eqref{eqn--bin-clt-normal-Sn}, we will need the following ingredients.
+
+\begin{theorem}[P{\'o}lya's Theorem]
+\label{thm--polya}
+Let \(\left\{ F_{n} \right\}\) be a sequence of cdfs and \(F\)
+be a cdf, all on \(\mathbb{R}\), such that \(F_{n} \rightsquigarrow F\) and
+\(F\) continuous.
+Then \(\lim_{n \to \infty} \sup_{y \in \mathbb{R}} \left| F_{n} (y) - F (y)
+\right| = 0\).
+\end{theorem}
+
+\begin{corollary}
+\label{cor--polya}
+Let \(\left\{ F_{n} \right\}\) be a sequence of cdfs and \(F\)
+be a cdf, all on \(\mathbb{R}\), such that \(F_{n} \rightsquigarrow F\) and
+\(F\) is continuous.
+If \(\left\{ x_{n} \right\}\) is a sequence in \(\mathbb{R}\) such that
+\(\lim_{n \to \infty} x_{n} = x \in \mathbb{R} \cup \{- \infty, + \infty\}\),
+then \(\lim_{n \to \infty} F_{n} \left( x_{n} \right) = F (x)\).
+\end{corollary}
+
+\begin{proof}[Proof of \Cref{thm--polya} and \Cref{cor--polya}]
+See \Cref{sec--prf--thm--cor--polya}.
+\end{proof}
+
+We now prove \eqref{eqn--bin-clt-normal-Sn}.
+Let \(Z_{n} = \left( S_{n} - n p_{n} \right) / \sqrt{n p_{n} \left( 1 - p_{n}
+\right)}\).
+Then
+\begin{equation*}
+  \Pr \left\{ \frac{S_{n}}{n} \geq p \right\} = \Pr \left\{ Z_{n} \geq
+  \frac{\sqrt{n} \left( p - p_{n} \right)}{\sqrt{p_{n} \left( 1 - p_{n}
+  \right)}} \right\}.
+\end{equation*}
+Since \(p_{n} = p + n^{- 1 / 2} \Delta + o \left( n^{- 1 / 2} \right)\) by
+hypothesis,
+\begin{equation*}
+  \frac{\sqrt{n} \left( p - p_{n} \right)}{\sqrt{p_{n} \left( 1
+  - p_{n} \right)}} = - \frac{\Delta}{\sqrt{p (1 - p)}} + o (1).
+\end{equation*}
+By \eqref{eqn--bin-clt-normal}, \(Z_{n} \rightsquigarrow \N (0, 1)\).
+Combine this with the above displays and \Cref{cor--polya} to \Cref{thm--polya}
+to get
+\begin{align*}
+  \lim_{n \to \infty} \Pr \left\{ \frac{S_{n}}{n} \geq p \right\} =
+  & \, \lim_{n \to \infty} \Pr \left\{ \frac{S_{n} - n p_{n}}{\sqrt{n p_{n}
+  \left( 1 - p_{n} \right)}} \geq - \frac{\Delta}{\sqrt{p (1 - p)}} + o (1)
+  \right\} \\
+  =
+  & \, 1 - \Phi \left( - \frac{\Delta}{\sqrt{p (1 - p)}} \right) = \Phi \left(
+  \frac{\Delta}{\sqrt{p (1 - p)}} \right).
+\end{align*}
+\qed
+
+\subsubsection{Proof of \texorpdfstring{\Cref{thm--polya}}{Theorem
+\ref{thm--polya}} and \texorpdfstring{\Cref{cor--polya}}{Corollary
+\ref{cor--polya}}}
+\label{sec--prf--thm--cor--polya}
+
+\Cref{cor--polya} is a consequence of \Cref{thm--polya} since
+\begin{align*}
+  \left| F_{n} \left( x_{n} \right) - F (x) \right| \leq & \, \left| F_{n}
+  \left( x_{n} \right) - F \left( x_{n} \right) \right| + \left| F \left( x_{n}
+  \right) - F (x) \right| \\
+  \leq
+  & \, \sup_{y \in \mathbb{R}} \left| F_{n} (y) - F (y) \right| + \left| F
+  \left( x_{n} \right) - F (x) \right|.
+\end{align*}
+The first term converges to zero by \Cref{thm--polya}.
+If \(x \in \{+ \infty, - \infty\}\), then the second term above converges to
+zero by standard properties of cdfs.
+If \(x \in \mathbb{R}\), then the second term above converges to zero by
+continuity of \(F\).
+Hence, it remains to show \Cref{thm--polya}.
+
+Let \(k \in \mathbb{N} \setminus \{1, 2\}\).
+Throughout, let \(x_{k, 0} = - \infty\) and \(x_{k, k} = + \infty\).
+By continuity of \(F\) and \Cref{lem--FQp-equal-p-continuity}, we can find
+\(x_{k, 1}, \dots, x_{k, k - 1}\) such that \(x_{k, j - 1} < x_{k, j}\) and
+\(F \left( x_{k, j} \right) = j / k\) for each \(j \in \{1, \dots, k - 1\}\).
+Clearly the same is true \(j \in \{0, k\}\) as well.
+Take any \(j \in \left\{ 1, \dots, k \right\}\) and note that
+\begin{equation*}
+  F \left( x_{k, j} \right) = \frac{j}{k} = \frac{j - 1}{k} + \frac{1}{k} = F
+  \left( x_{k, j - 1} \right) + \frac{1}{k}.
+\end{equation*}
+Thus for \(x \in \left[ x_{k, j - 1}, x_{k, j} \right]\),
+\begin{align*}
+  F_{n} (x) - F (x) \leq
+  & \, F_{n} \left( x_{k, j} \right) - F \left( x_{k, j - 1} \right) = F_{n}
+  \left( x_{k, j} \right) - F \left( x_{k, j} \right) + \frac{1}{k} \\
+  \leq
+  & \, \max_{l \in \{0, 1, \dots, k\}} \left| F_{n} \left( x_{k, l} \right) - F
+  \left( x_{k, l} \right) \right| + \frac{1}{k} \\
+  F_{n} (x) - F (x) \geq
+  & \, F_{n} \left( x_{k, j - 1} \right) - F \left( x_{k, j} \right) = F_{n}
+  \left( x_{k, j - 1} \right) - F \left( x_{k, j - 1} \right) - \frac{1}{k} \\
+  \geq
+  & \, - \max_{l \in \{0, 1, \dots, k\}} \left| F_{n} \left( x_{k, l}
+  \right) - F \left( x_{k, l} \right) \right| - \frac{1}{k}.
+\end{align*}
+Therefore,
+\begin{equation}
+  \sup_{x \in \mathbb{R}} \left| F_{n} (x) - F (x) \right| \leq
+  \max_{l \in \{0, 1, \dots, k\}} \left| F_{n} \left( x_{k, l}
+  \right) - F \left( x_{k, l} \right) \right| + \frac{1}{k}.
+  \label{eqn--polya-ineq-1}
+\end{equation}
+Let \(\varepsilon > 0\) be given.
+Choose \(K_{\varepsilon} \in \mathbb{N}\) such that \(K_{\varepsilon} \geq 2 /
+\varepsilon\).
+By \(F_{n} \rightsquigarrow F\) and continuity of \(F\), there must exist a
+\(N_{\varepsilon} \in \mathbb{N}\) such that for all \(n \geq N_{\varepsilon}\)
+and all \(l \in \left\{ 1, \dots, K_{\varepsilon} - 1 \right\}\),
+\begin{equation*}
+  \left| F_{n} \left( x_{K_{\varepsilon}, l} \right) - F \left(
+  x_{K_{\varepsilon}, l} \right) \right| \leq \frac{\varepsilon}{2}.
+\end{equation*}
+Combine this with \(1 / K_{\varepsilon} \leq \varepsilon / 2\) and
+\eqref{eqn--polya-ineq-1} to see that
+\begin{equation*}
+  \sup_{x \in \mathbb{R}} \left| F_{n} (x) - F (x) \right| \leq \varepsilon
+  \quad \text{for all } n \geq N_{\varepsilon}.
+\end{equation*}
+This proves \Cref{thm--polya}.
+\qed
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../note-clt-sample-quantile"
+%%% End:

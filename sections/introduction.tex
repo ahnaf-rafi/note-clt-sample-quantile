@@ -2,50 +2,140 @@
 
 \section{Introduction}
 
-This note provides an exposition of the central limit theorem for sample
-quantiles in the spirit of \citet[Example 24,
-p. 53]{1984pollardConvergenceStochasticProcesses}.
-A more general result can be found in \citet[Section
-2.3.3, pp. 77-84]{1980serflingApproximationTheoremsMathematical}.
-The purpose of this note is to provide a practical example of the
-Lindeberg-Feller central limit theorem (CLT).
+This note revisits a classic asymptotic normality result for sample quantiles
+which has been known since \citet{1946mostellerSomeUsefulInefficient} and
+\citet{1949smirnovLimitDistributionsTerms}.
+The approach given here follows those of
+\citet[Chapter III Section 4 Example 24,
+p. 53]{1984pollardConvergenceStochasticProcesses} and
+\citet[Section 2.3.3, pp. 77-84]{1980serflingApproximationTheoremsMathematical}.
+In particular, we relate the sampling distribution of the sample
+quantile to probabilities determined by binomial sums whose probability
+parameters may drift with the number of trials.
+This drift phenomenon motivates the use of the classic central limit
+theorem (CLT) for independent triangular arrays due to Liapunov.
 
-\begin{definition}
-A function \(F : \mathbb{R} \to \mathbb{R}\) is a cumulative distribution
-function (cdf) if and only if
-\begin{enumerate}
-  \item \(F\) is weakly increasing, i.e. if \(x \leq y\) then \(F (x) \leq F
-    (y)\),
-  \item \(F\) is right continuous, i.e. \(\lim_{x \downarrow y} F (x) = F (y)\)
-    for every \(y \in \mathbb{R}\),
-  \item \(\lim_{y \to - \infty} F (y) = 0\) and \(\lim_{y \to \infty} F (y) =
-    1\).
-\end{enumerate}
-\end{definition}
-
-\begin{definition}
-For real valued random variables \(Y_{1}, \dots, Y_{n}\), the empirical
-cumulative distribution function (ecdf) is defined by
+Let \(\left\{ Y_{i} \right\}_{i = 1}^{\infty}\) be a sequence of independent and
+identically distributed (iid) real valued random variables on a common
+probability space \((\Omega, \mathscr{F}, \Pr)\).
+Denote their common cumulative distribution function (cdf) [also called the
+population cdf] by
+\begin{equation*}
+  F (y) := \Pr \left\{ Y_{1} \leq y \right\}.
+\end{equation*}
+The parameter of interest are the associated population quantiles, which are
+\begin{equation}
+  \theta_{p} := Q (p; F) := \inf \{y \in \mathbb{R} : F (y) \geq p\},
+  \quad \text{for } p \in (0, 1).
+  \label{eqn--quantile-fn}
+\end{equation}
+The empirical cdf (ecdf) corresponding to the first \(n\) observations is
 \begin{equation*}
   \widehat{F}_{n} (y) := \widehat{F}_{n} \left( y; Y_{1}, \dots, Y_{n} \right)
-  := \frac{1}{n} \sum_{i = 1}^{n} \mathbf{1} \left\{ Y_{i} \leq y \right\}.
+  := \frac{1}{n} \sum_{i = 1}^{n} \mathbf{1} \left\{ Y_{i} \leq y \right\},
+  % \label{eqn--ecdf-def}
 \end{equation*}
-\end{definition}
+with corresponding sample quantiles
+\begin{equation}
+  \widehat{\theta}_{p, n} := \inf \left\{ y \in \mathbb{R} : \widehat{F}_{n}
+  (y) \geq p \right\} = Q \left( p; \widehat{F}_{n} \right) \quad \text{for } Q
+  \text{ defined in \eqref{eqn--quantile-fn}.}
+  \label{eqn--sample-quantile-def}
+\end{equation}
+We are interested in limits of the sampling distribution
+\begin{equation}
+  H_{p, n} (t) := \Pr \left\{ \sqrt{n} \left( \widehat{\theta}_{p, n} -
+  \theta_{p} \right) \leq t \right\} = \Pr \left\{ \widehat{\theta}_{p, n} \leq
+  \theta_{p} + \frac{t}{\sqrt{n}} \right\}.
+  \label{eqn--sample-quantile-law-def}
+\end{equation}
+To characterize limits of \(H_{p, n} (\cdot)\) in
+\eqref{eqn--sample-quantile-law-def}, we will sometimes need directional
+differentiability assumptions on \(F\).
+These are defined in \Cref{def--dir-diff} below.
+\Cref{thm--clt-quantile} provides a statement of the main
+asymptotic normality result.
+\Cref{cor--clt-quantile} states the more commonly known form of the result for
+absolutely continuous \(F\) with density \(f\) continuous at \(\theta_{p}\).
 
 \begin{definition}
-For a cdf \(G\) on \(\mathbb{R}\) and \(p \in (0, 1)\), the associated quantile
-is
-\begin{equation*}
-  Q (p; G) := \inf \{y \in \mathbb{R} : G (y) \geq p\}.
-\end{equation*}
+\label{def--dir-diff}
+The function \(F : \mathbb{R} \to \mathbb{R}\) is right-differentiable at
+\(y\) with right-derivative \(f (y)\) iff for every real sequence \(\left\{
+\delta_{n} \right\}\) such that \(\delta_{n} > 0\) for all \(n \in \mathbb{N}\)
+and \(\lim_{n \to \infty} \delta_{n} = 0\),
+\begin{equation}
+  \lim_{n \to \infty} \frac{F \left( y + \delta_{n} \right) - F (y)}{\delta_{n}}
+  = f (y).
+  \label{eqn--dir-diff-def}
+\end{equation}
+The function \(F\) is left-differentiable at \(y\) with left-derivative \(f
+(y)\) if \eqref{eqn--dir-diff-def} holds instead for every
+real sequence \(\left\{ \delta_{n} \right\}\) such that \(\delta_{n} < 0\) for
+all \(n \in \mathbb{N}\) and and \(\lim_{n \to \infty} \delta_{n} = 0\).
 \end{definition}
 
-\begin{assumption}
-\label{asm--iid}
-Let \(F\) be a cumulative distribution function (cdf) on \(\mathbb{R}\).
-\(\left\{ Y_{i} \right\}_{i = 1}^{\infty}\) is a sequence of iid random
-variables all with cdf \(F\).
-\end{assumption}
+\begin{remark}
+\label{rem--diff-equiv-bi-dir-diff}
+\(F\) is differentiable at \(y\) with derivative \(f (y)\) iff \(F\) is both
+right- and left-differentiable as in \Cref{def--dir-diff} and its left- and
+right-derivatives are both equal to \(f (y)\).
+\end{remark}
+
+\begin{theorem}
+\label{thm--clt-quantile}
+Suppose the population cdf \(F\), and \(p \in (0, 1)\) and \(\theta_{p} \in
+\mathbb{R}\) satisfy \(p = F \left( \theta_{p} \right)\).
+Then
+\begin{equation}
+  \lim_{n \to \infty} H_{p, n} (0) = \frac{1}{2}.
+  \label{eqn--clt-quantile-0}
+\end{equation}
+Suppose in addition to the hypothesis \(p = F \left( \theta_{p} \right)\),
+one of the following holds:
+\begin{enumerate}[label=\roman*.]
+  \item \(F\) is right-differentiable at \(\theta_{p}\) with right-derivative
+    \(f \left( \theta_{p} \right)\), and \(t > 0\);
+  \item \(F\) is left-differentiable at \(\theta_{p}\) with left-derivative \(f
+    \left( \theta_{p} \right)\), and \(t < 0\).
+\end{enumerate}
+Then
+\begin{equation}
+  \lim_{n \to \infty} H_{p, n} (t) = \Phi \left( \frac{f \left( \theta_{p}
+  \right) t}{\sqrt{p (1 - p)}} \right).
+  \label{eqn--clt-quantile-non0}
+\end{equation}
+Therefore if in addition to the hypothesis \(p = F \left( \theta_{p} \right)\),
+\(F\) is differentiable at \(\theta_{p}\) with derivative \(f \left( \theta_{p}
+\right)\), then
+\begin{equation}
+  \sqrt{n} \left( \widehat{\theta}_{p, n} - \theta_{p} \right) \rightsquigarrow
+  \N \left( 0, \sigma^{2} (p) \right) \quad \text{as } n \to \infty, \text{
+  where } \sigma^{2} (p) := \frac{p (1 - p)}{f \left( \theta_{p} \right)^{2}}.
+  \label{eqn--clt-quantile}
+\end{equation}
+\end{theorem}
+
+\begin{corollary}
+\label{cor--clt-quantile}
+If \(F\) is absolutely continuous with Lebesgue-density \(f\) and \(f\) is
+continuous at \(\theta_{p}\), then \eqref{eqn--clt-quantile} also holds,
+i.e.
+\begin{equation*}
+  \sqrt{n} \left( \widehat{\theta}_{p, n} - \theta_{p} \right) \rightsquigarrow
+  \N \left( 0, \sigma^{2} (p) \right) \quad \text{as } n \to \infty, \text{
+  where } \sigma^{2} (p) := \frac{p (1 - p)}{f \left( \theta_{p} \right)^{2}}.
+\end{equation*}
+\end{corollary}
+
+The rest of this note is organized as follows.
+\Cref{cor--clt-quantile} is proven in \Cref{sec--prf--cor--clt-quantile}.
+\Cref{thm--clt-quantile} is proven in
+\Cref{sec--prf--thm--clt-quantile}.
+\Cref{sec--cdf-behavior} states and proves some fundamental properties of cdfs
+that are used throughout these sections.
+\Cref{sec--prf--thm--bin-clt-normal} proves a key central limit theorem
+(\Cref{thm--bin-clt-normal}) used in the proof of \Cref{thm--clt-quantile}.
 
 %%% Local Variables:
 %%% mode: LaTeX

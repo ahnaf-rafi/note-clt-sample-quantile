@@ -1,0 +1,88 @@
+%! TEX root = ../note-clt-sample-quantile.tex
+
+\section{Some basic results on the behavior cdfs}
+\label{sec--cdf-behavior}
+
+\begin{lemma}
+\label{lem--p-leq-Fy-iff-Qp-leq-y}
+Given \((p, y) \in (0, 1) \times \mathbb{R}\),
+\begin{equation}
+  p \leq F (y) \iff Q (p; F) \leq y.
+  \label{eqn--p-leq-Fy-iff-Qp-leq-y}
+\end{equation}
+\end{lemma}
+
+\begin{proof}[Proof of \Cref{lem--p-leq-Fy-iff-Qp-leq-y}]
+\(p \leq F (y) \implies Q (p; F) \leq y\) is immediate from the definition of
+\(Q\).
+By \Cref{lem--FQ-geq-p} \(p \leq F (Q (p; F))\) and so if \(Q (p; F) \leq y\)
+then \(p \leq F (Q (p; F)) \leq F (y)\).
+\end{proof}
+
+\begin{lemma}
+\label{lem--FQ-geq-p}
+For every \(p \in (0, 1)\), \(F (Q (p; F)) \geq p\).
+\end{lemma}
+
+\begin{proof}[Proof of \Cref{lem--FQ-geq-p}]
+Suppose that for some \(p \in (0, 1)\), \(F (Q (p; F)) < p\).
+Take any sequence \(\left\{ y_{n} \right\}\) such that \(Q (p; F) < y_{n + 1}
+\leq y_{n}\) for all \(n \in \mathbb{N}\) and \(\lim_{n \to
+\infty} y_{n} = Q (p; F)\).
+Since \(F\) is increasing, \(F (Q (p; F)) \leq F \left( y_{n + 1} \right) \leq F
+\left( y_{n} \right)\) for all \(n \in \mathbb{N}\).
+By right-continuity of \(F\), \(\lim_{n \to \infty} F \left( y_{n} \right) = F
+(Q (p; F))\).
+Set \(\varepsilon = \frac{1}{2} [p - F (Q (p; F))] > 0\).
+Hence, there eyists \(N_{\varepsilon} \in \mathbb{N}\) such that
+\begin{equation}
+  F \left( y_{n} \right) - F (Q (p; F)) = \left| F \left( y_{n} \right) - F (Q
+  (p; F)) \right| < \varepsilon = \frac{p - F (Q (p; F))}{2} \qquad \forall n
+  \geq N_{\varepsilon}.
+\end{equation}
+Therefore, \(F \left( y_{n} \right) < \frac{1}{2} [p + F (Q (p; F))] < p\).
+Pick any \(n \geq N_{\varepsilon}\),
+Then by construction, \(y_{n} > Q (p; F)\) and since \(F \left( y_{n} \right) <
+p\), \(y_{n} < y\) for any \(y\) such that \(F (y) \geq p\).
+Thus we have
+\begin{equation*}
+  Q (p; F) < y_{n} \leq \inf \left\{ y \in \mathbb{R} : F (y) \geq p \right\} =
+  Q (p; F),
+\end{equation*}
+which is a contradiction.
+\end{proof}
+
+\begin{lemma}
+\label{lem--FQp-equal-p-continuity}
+If \(F\) is continuous at \(Q (p; F)\), then \(F (Q (p; F)) = p\).
+\end{lemma}
+
+\begin{proof}[Proof of \Cref{lem--FQp-equal-p-continuity}]
+It suffices to show continuity of \(F\) implies \(F (Q (p; F)) \leq p\) since
+we know \(F (Q (p; F)) \geq p\) for any cdf \(F\) by \Cref{lem--FQ-geq-p}.
+We do this by contrapositive, i.e. if \(F (Q (p; F)) > p\),
+then \(F\) has a discontinuity at \(Q (p; F)\).
+It is sufficient to find a sequence \(\left\{ y_{n} \right\}\) such that
+\(\lim_{n \to \infty} y_{n} = Q (p; F)\), but \(\limsup_{n \to \infty} F
+\left( y_{n} \right) \neq F (Q (p; F))\).
+
+Since \(Q (p; F) := \inf \left\{ y \in \mathbb{R} : F (y) \geq p
+\right\}\), we know that if \(y < Q (p; F)\), then \(F (y) < p\).
+Take a sequence \(\left\{ y_{n} \right\}\) such that \(y_{n} \uparrow Q (p;
+F)\), i.e. \(y_{n} \leq y_{n + 1} < Q (p; F)\) for every \(n \in \mathbb{N}\)
+and \(\lim_{n \to \infty} y_{n} = Q (p; F)\).
+A concrete eyample would be for instance \(y_{n} := Q (p; F) - (1 / n)\).
+For each \(n \in \mathbb{N}\), it follows that \(F \left( y_{n} \right) < p\)
+since \(y_{n} < Q (p; F)\).
+This implies \(\limsup_{n \to \infty} F \left( y_{n} \right) \leq p < F (Q (p;
+F))\).
+It therefore follows that \(F\) is discontinuous at \(Q (p; F)\).
+\end{proof}
+
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../note-clt-sample-quantile"
+%%% End:
+
+% LocalWords:  cdf ecdf
