@@ -25,16 +25,16 @@ given \(a, b \in \mathbb{R}\) such that \(a \leq \theta_{p} \leq b\),
   F (b) - F (a) = \int_{a}^{b} f (x) \; \mathrm{d} x.
 \end{equation*}
 Let \(\delta = \delta \left( \varepsilon, \theta_{p} \right) > 0\) be such that
-\(\left| f (y) - f \left( \theta_{p} \right) \right|\) if
-\(\left| y - \theta_{p} \right| < \delta\).
-Let \(a\), \(b\) satisfy \(\theta_{p} - \delta < a \leq \theta_{p} \leq b <
-\theta_{p} + \delta\) and \(a < b\).
+\(\left| f (y) - f \left( \theta_{p} \right) \right| \leq \varepsilon\) if
+\(\left| y - \theta_{p} \right| \leq \delta\).
+Let \(a\), \(b\) satisfy \(\theta_{p} - \delta \leq a \leq \theta_{p} \leq b
+\leq \theta_{p} + \delta\) and \(a < b\).
 Then
 \begin{equation*}
   \left| \frac{F (b) - F (a)}{b - a} - f \left( \theta_{p} \right) \right| =
   \left| \frac{\int_{a}^{b} f (x) ; \mathrm{d} x}{b - a} - f \left( \theta_{p}
   \right) \right| = \left| \frac{1}{b - a} \int_{a}^{b} \left( f (x) - f \left(
-  \theta_{p} \right) \right) \; \mathrm{d} x \right| < \varepsilon.
+  \theta_{p} \right) \right) \; \mathrm{d} x \right| \leq \varepsilon.
 \end{equation*}
 
 \qed
