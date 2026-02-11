@@ -118,27 +118,29 @@ Let \(Z_{n} = \left( S_{n} - n p_{n} \right) / \sqrt{n p_{n} \left( 1 - p_{n}
 \right)}\).
 Then
 \begin{equation*}
-  \Pr \left\{ \frac{S_{n}}{n} \geq p \right\} = \Pr \left\{ Z_{n} \geq
-  \frac{\sqrt{n} \left( p - p_{n} \right)}{\sqrt{p_{n} \left( 1 - p_{n}
+  \Pr \left\{ \frac{S_{n}}{n} \geq p_{\ast} \right\} = \Pr \left\{ Z_{n} \geq
+  \frac{\sqrt{n} \left( p_{\ast} - p_{n} \right)}{\sqrt{p_{n} \left( 1 - p_{n}
   \right)}} \right\}.
 \end{equation*}
-Since \(p_{n} = p + n^{- 1 / 2} \Delta + o \left( n^{- 1 / 2} \right)\) by
-hypothesis,
+Since \(p_{n} = p_{\ast} + n^{- 1 / 2} \Delta + o \left( n^{- 1 / 2} \right)\)
+by hypothesis,
 \begin{equation*}
-  \frac{\sqrt{n} \left( p - p_{n} \right)}{\sqrt{p_{n} \left( 1
-  - p_{n} \right)}} = - \frac{\Delta}{\sqrt{p (1 - p)}} + o (1).
+  \frac{\sqrt{n} \left( p_{\ast} - p_{n} \right)}{\sqrt{p_{n} \left( 1
+  - p_{n} \right)}} = - \frac{\Delta}{\sqrt{p_{\ast} \left( 1 - p_{\ast}
+  \right)}} + o (1).
 \end{equation*}
 By \eqref{eqn--bin-clt-normal}, \(Z_{n} \rightsquigarrow \N (0, 1)\).
 Combine this with the above displays and \Cref{cor--polya} to \Cref{thm--polya}
 to get
 \begin{align*}
-  \lim_{n \to \infty} \Pr \left\{ \frac{S_{n}}{n} \geq p \right\} =
+  \lim_{n \to \infty} \Pr \left\{ \frac{S_{n}}{n} \geq p_{\ast} \right\} =
   & \, \lim_{n \to \infty} \Pr \left\{ \frac{S_{n} - n p_{n}}{\sqrt{n p_{n}
-  \left( 1 - p_{n} \right)}} \geq - \frac{\Delta}{\sqrt{p (1 - p)}} + o (1)
-  \right\} \\
+  \left( 1 - p_{n} \right)}} \geq - \frac{\Delta}{\sqrt{p_{\ast} \left( 1 -
+  p_{\ast} \right)}} + o (1) \right\} \\
   =
-  & \, 1 - \Phi \left( - \frac{\Delta}{\sqrt{p (1 - p)}} \right) = \Phi \left(
-  \frac{\Delta}{\sqrt{p (1 - p)}} \right).
+  & \, 1 - \Phi \left( - \frac{\Delta}{\sqrt{p_{\ast} \left( 1 - p_{\ast}
+  \right)}} \right) = \Phi \left( \frac{\Delta}{\sqrt{p_{\ast} \left( 1 -
+  p_{\ast} \right)}} \right).
 \end{align*}
 \qed
 
